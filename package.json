@@ -1,0 +1,31 @@
+{
+    "name": "laboratorio-cintia-backend",
+    "version": "1.0.0",
+    "description": "Simples api para controle de pacientes e exames.",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon --exec babel-node src/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gsmatheus/laboratorio-cintia-backend.git"
+    },
+    "author": "Matheus",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/gsmatheus/laboratorio-cintia-backend/issues"
+    },
+    "homepage": "https://github.com/gsmatheus/laboratorio-cintia-backend#readme",
+    "dependencies": {
+        "bcrypt": "^5.0.0",
+        "express": "^4.17.1",
+        "mysql": "^2.18.1"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3",
+        "babel-preset-env": "^1.7.0",
+        "nodemon": "^2.0.7"
+    }
+}
