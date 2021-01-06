@@ -1,4 +1,8 @@
-import {InsereNovoPaciente, ProcuraUmPaciente, InsereInformacoesPaciente} from "../models/PacienteModel";
+import {
+    InsereNovoPaciente, InsereInformacoesPaciente,
+    ProcuraUmPaciente,
+    BuscaTodosPacientes, BuscaInformacaoPaciente
+} from "../models/PacienteModel";
 
 const config = require('../config/mensagens');
 
@@ -47,7 +51,7 @@ export function NovoPaciente(req, res) {
                     res.status(500).send({message: config.PACIENTE.informacoes_erro})
                 })
             }, reason => {
-                res.status(500).send({message: config.PACIENTE.desconhecido, err:reason})
+                res.status(500).send({message: config.PACIENTE.desconhecido, err: reason})
             })
         } else {
             res.status(409).send({message: config.PACIENTE.procura_sucesso})
@@ -56,3 +60,47 @@ export function NovoPaciente(req, res) {
         res.status(500).send({message: config.PACIENTE.procura_erro})
     })
 }
+
+export function BuscaPaciente(req, res) {
+    /**
+     * Busca os dados de um unico paciente.
+     * @type {string}
+     */
+    let cpf = req.params.cpf;
+
+    /**
+     * Verifica se o cpf está cadastrado.
+     */
+
+    ProcuraUmPaciente(cpf).then(value => {
+        if (value.length !== 0) {
+            let id = value[0].id
+
+            /**
+             * Buscando os dados.
+             */
+            BuscaInformacaoPaciente(id).then(value1 => {
+                res.status(200).send({dados: value1})
+            }, () => {
+                res.status(400).send({message: config.PACIENTE.busca_erro2})
+            })
+        } else {
+            res.status(400).send({message: config.PACIENTE.busca_sem_cadastro})
+        }
+    }, () => {
+        res.status(500).send({message: config.PACIENTE.procura_erro})
+    })
+}
+
+export function BuscaPacientes(req, res) {
+    /**
+     * Busca todos os pacientes, retornando as informações de cada.
+     */
+
+    BuscaTodosPacientes().then(value => {
+        res.status(200).send({pacientes: value})
+    }, () => {
+        res.status(400).send({message: config.PACIENTE.busca_erro})
+    })
+}
+
