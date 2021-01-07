@@ -1,7 +1,6 @@
 import {
-    InsereNovoPaciente, InsereInformacoesPaciente,
-    ProcuraUmPaciente,
-    BuscaTodosPacientes, BuscaInformacaoPaciente
+    InsereNovoPaciente, InsereInformacoesPaciente, ProcuraUmPaciente,
+    BuscaTodosPacientes, BuscaInformacaoPaciente, AtualizaPaciente, ApagaPaciente
 } from "../models/PacienteModel";
 
 const config = require('../config/mensagens');
@@ -20,7 +19,7 @@ export function NovoPaciente(req, res) {
     /**
      * Verifica se o paciente já está cadastrado.
      */
-
+    console.log(cpf)
     ProcuraUmPaciente(
         cpf
     ).then(value => {
@@ -104,3 +103,57 @@ export function BuscaPacientes(req, res) {
     })
 }
 
+export function ModificaPaciente(req, res) {
+    /**
+     * Atualiza os dados de um paciente.
+     */
+    let id = req.body.id;
+    let data = req.body.data;
+    let type = req.body.type;
+
+    /**
+     * Verifica em qual tabela a informação será modificada
+     */
+    let table;
+    switch (type) {
+        case "login":
+            table = 'PacienteLogin'
+            break;
+        case "perfil":
+            table = 'Paciente'
+            break;
+        default:
+            res.status(400).send({message: config.PACIENTE.type_invalido})
+    }
+
+    /**
+     * Atualiza os dados.
+     */
+    AtualizaPaciente(table, data, id).then(() => {
+        res.status(200).send({message: config.PACIENTE.atualiza_sucesso})
+    }, () => {
+        res.status(500).send({message: config.PACIENTE.atualiza_erro})
+    })
+
+}
+
+export function DeletaPaciente(req, res) {
+    /**
+     * Apaga todos os dados do paciente do banco de dados.
+     */
+    let cpf = req.params.cpf;
+
+    ProcuraUmPaciente(cpf).then(value => {
+        if (value.length !== 0) {
+            ApagaPaciente(cpf).then(() => {
+                res.status(200).send({message: config.PACIENTE.apaga_sucesso})
+            }, () => {
+                res.status(500).send({message: config.PACIENTE.apaga_erro})
+            })
+        } else {
+            res.status(400).send({message: config.PACIENTE.busca_sem_cadastro})
+        }
+    }, () => {
+        res.status(500).send({message: config.PACIENTE.procura_erro})
+    })
+}

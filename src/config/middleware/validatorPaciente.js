@@ -23,6 +23,5 @@ export default function ValidaPaciente(condition) {
                 next()
             }
         }
-
     }
 }
