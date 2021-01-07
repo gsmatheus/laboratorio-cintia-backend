@@ -19,7 +19,6 @@ export function NovoPaciente(req, res) {
     /**
      * Verifica se o paciente já está cadastrado.
      */
-    console.log(cpf)
     ProcuraUmPaciente(
         cpf
     ).then(value => {
@@ -141,7 +140,7 @@ export function DeletaPaciente(req, res) {
     /**
      * Apaga todos os dados do paciente do banco de dados.
      */
-    let cpf = req.params.cpf;
+    let cpf = req.params.cpf
 
     ProcuraUmPaciente(cpf).then(value => {
         if (value.length !== 0) {

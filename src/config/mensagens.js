@@ -13,5 +13,12 @@ module.exports = {
         type_invalido: 'Preencha com um tipo valido.',
         apaga_sucesso: 'Paciente apagado com sucesso.',
         apaga_erro: 'Ocorreu um erro, não foi possivel apagar os dados desse paciente.'
+    },
+    EXAME: {
+        novo_sucesso: 'Exame salvo com sucesso.',
+        novo_erro: 'Não foi possivel salvar esse exame.',
+        busca_erro: 'Não foi possivel consultar os exames.',
+        atualiza_sucesso: 'Dados dos exame atualizado com sucesso.',
+        atualiza_erro: 'Não foi possivel atualizar os dados desse exame.'
     }
 }
