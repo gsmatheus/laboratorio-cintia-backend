@@ -9,7 +9,7 @@ export function InsereInformacoesPaciente(informacoes) {
 }
 
 export function ProcuraUmPaciente(cpf) {
-    return Select('SELECT idPacienteLogin AS id FROM PacienteLogin WHERE cpf = ?', cpf)
+    return Select('SELECT idPacienteLogin AS id, datanasc, cpf FROM PacienteLogin WHERE cpf = ?', cpf)
 }
 
 export function BuscaTodosPacientes() {

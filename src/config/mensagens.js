@@ -20,5 +20,11 @@ module.exports = {
         busca_erro: 'Não foi possivel consultar os exames.',
         atualiza_sucesso: 'Dados dos exame atualizado com sucesso.',
         atualiza_erro: 'Não foi possivel atualizar os dados desse exame.'
+    },
+    ADMINISTRADOR: {
+        login_incorreto: 'Sua está está incorreta, tente novamente.',
+        login_consulta_erro: 'Nao foi possivel consultar o username.',
+        login_user_errado: 'Nao existe cadastro com esse username.'
     }
+
 }

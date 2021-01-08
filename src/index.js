@@ -2,9 +2,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import Administrador from './routes/Administrador';
+import Usuario from './routes/Usuario';
 
 const app = express();
 const morgan = require('morgan');
+require("dotenv-safe").config();
 
 /**
  * Configurações do Express
@@ -21,7 +23,7 @@ app.use(bodyParser.json())
  */
 
 app.use('/admin', Administrador);
-
+app.use('/user', Usuario);
 
 /**
  * Iniciando o servidor
